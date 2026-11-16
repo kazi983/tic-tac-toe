@@ -6,6 +6,12 @@
   background-color: white;
 }
 
+.winning-square {
+  border: 2px orange solid;
+  color: black;
+  background-color: rgba(255, 166, 0, 0.511);
+}
+
 .square:hover {
   cursor: pointer;
 }
@@ -13,12 +19,14 @@
 .game-board {
   margin-inline: auto;
 }
+
 .square-container {
   padding: 3rem;
   display: grid;
   grid-template-columns: repeat(3, auto);
   gap: 0.5rem;
 }
+
 .square:disabled {
   cursor: not-allowed;
 }

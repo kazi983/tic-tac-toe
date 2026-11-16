@@ -6,12 +6,22 @@ type SquareValue = "x" | "o" | null;
 type SquareProps = {
   value: SquareValue;
   onSquareClick: () => void;
+  isWinningSquare: boolean;
   disable: boolean;
 };
 
-function Square({ value, onSquareClick, disable }: SquareProps) {
+function Square({
+  value,
+  onSquareClick,
+  disable,
+  isWinningSquare,
+}: SquareProps) {
   return (
-    <button className="square" onClick={onSquareClick} disabled={disable}>
+    <button
+      className={`square ${isWinningSquare && "winning-square"}`}
+      onClick={onSquareClick}
+      disabled={disable}
+    >
       {value}
     </button>
   );
@@ -33,7 +43,7 @@ function calculateWinner(squares: SquareValue[]) {
     const [a, b, c] = lines[i];
 
     if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
-      return squares[a];
+      return { winner: squares[a], line: lines[i] };
     }
   }
 }
@@ -45,7 +55,7 @@ type BoardProps = {
 };
 
 function Board({ xIsNext, squares, onPlay }: BoardProps) {
-  const winner = calculateWinner(squares);
+  const winnerLine = calculateWinner(squares);
 
   function handleClick(i: number) {
     // Ignore the click if the game is over or the square is already filled.
@@ -66,7 +76,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
   }
 
   let status: string;
-  if (winner) status = `Winner: ${winner}`;
+  if (winnerLine) status = `Winner: ${winnerLine.winner}`;
   else if (squares.every(Boolean)) status = "Draw";
   else status = `Next Player: ${xIsNext ? "x" : "o"}`;
 
@@ -78,7 +88,8 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
             key={index}
             value={square}
             onSquareClick={() => handleClick(index)}
-            disable={winner ? true : false}
+            disable={winnerLine ? true : false}
+            isWinningSquare={winnerLine?.line.includes(index) ? true : false}
           />
         ))}
       </div>
