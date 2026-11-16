@@ -18,7 +18,7 @@ function Square({
 }: SquareProps) {
   return (
     <button
-      className={`square ${isWinningSquare && "winning-square"}`}
+      className={`square ${isWinningSquare ? "winning-square" : ""}`}
       onClick={onSquareClick}
       disabled={disable}
     >
