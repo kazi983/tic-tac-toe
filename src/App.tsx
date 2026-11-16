@@ -2,14 +2,16 @@ import { useState } from "react";
 import "./App.css";
 
 type SquareValue = "x" | "o" | null;
+
 type SquareProps = {
   value: SquareValue;
   onSquareClick: () => void;
+  disable: boolean;
 };
 
-function Square({ value, onSquareClick }: SquareProps) {
+function Square({ value, onSquareClick, disable }: SquareProps) {
   return (
-    <button className="square" onClick={onSquareClick}>
+    <button className="square" onClick={onSquareClick} disabled={disable}>
       {value}
     </button>
   );
@@ -41,6 +43,7 @@ type BoardProps = {
   squares: SquareValue[];
   onPlay: (nextSquares: SquareValue[]) => void;
 };
+
 function Board({ xIsNext, squares, onPlay }: BoardProps) {
   const winner = calculateWinner(squares);
 
@@ -75,6 +78,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
             key={index}
             value={square}
             onSquareClick={() => handleClick(index)}
+            disable={winner ? true : false}
           />
         ))}
       </div>
