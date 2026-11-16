@@ -1,0 +1,19 @@
+.square {
+  width: 3rem;
+  height: 3rem;
+  border: 1.5px solid black;
+  font-size: large;
+  background-color: white;
+}
+
+.square:hover {
+  cursor: pointer;
+}
+
+.square-container {
+  margin-inline: auto;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 0.5rem;
+}
