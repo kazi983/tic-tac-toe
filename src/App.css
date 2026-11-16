@@ -10,8 +10,10 @@
   cursor: pointer;
 }
 
-.square-container {
+.game-board {
   margin-inline: auto;
+}
+.square-container {
   padding: 3rem;
   display: grid;
   grid-template-columns: repeat(3, auto);
